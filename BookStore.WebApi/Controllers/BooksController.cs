@@ -3,7 +3,6 @@
 namespace BookStore.WebApi.Controllers
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -27,8 +26,6 @@ namespace BookStore.WebApi.Controllers
             if (string.IsNullOrEmpty(searchString))
             {
                 var books = await this.bookManager.GetBooksAsync();
-
-                Debug.WriteLine("We got the books!");
 
                 return books;
             }
