@@ -25,12 +25,10 @@ namespace BookStore.WebApi.Controllers
         {
             if (string.IsNullOrEmpty(searchString))
             {
-                var books = await this.bookManager.GetBooksAsync();
-
-                return books;
+                return await this.bookManager.GetBooksAsync();
             }
 
-            searchString.ToLower();
+            searchString = searchString.ToLower();
 
             return
                 await this.bookManager.GetBooksAsync().ContinueWith(books => (books.Result as IEnumerable<Book>).Where(
