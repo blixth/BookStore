@@ -1,0 +1,38 @@
+﻿<div class="panel panel-primary"
+     ng-controller="BookListCtrl as vm">
+
+    <form ng-submit="vm.search()">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="vm.searchCriteria">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="vm.search()">Search</button>
+            </span>
+        </div>
+    </form>
+    <div class="panel-heading"
+         style="font-size: large">
+        Book List
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Title</td>
+                <td>Author</td>
+                <td>Price</td>
+                <td>In Stock</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="book in vm.books">
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.price | currency }}</td>
+                <td>{{ book.inStock }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
