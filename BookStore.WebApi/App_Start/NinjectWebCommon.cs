@@ -5,12 +5,11 @@ namespace BookStore.WebApi.App_Start
 {
     using System;
     using System.Web;
-    using BookStore.Data;
-    using BookStore.Integration;
-    using Managers;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
+    using Repositories;
+    using Services;
 
     public static class NinjectWebCommon
     {
@@ -62,9 +61,8 @@ namespace BookStore.WebApi.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IBookManager>().To<BookManager>();
-            kernel.Bind<IBookData>().To<BookData>();
-            kernel.Bind<IContribeClient>().To<ContribeClient>();
+            kernel.Bind<IBookstoreService>().To<BookstoreService>();
+            kernel.Bind<IBookRepository>().To<BookRepository>();
         }
     }
 }

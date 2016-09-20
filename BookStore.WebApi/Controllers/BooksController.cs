@@ -1,23 +1,20 @@
-﻿using System.Globalization;
-
-namespace BookStore.WebApi.Controllers
+﻿namespace BookStore.WebApi.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Cors;
-    using Managers;
     using Models;
+    using Services;
 
     [EnableCors("http://localhost:34659", "*", "*")]
     public class BooksController : ApiController, IBooksController
     {
-        private readonly IBookManager bookManager;
+        private readonly IBookstoreService bookstoreService;
 
-        public BooksController(IBookManager bookManager)
+        public BooksController(IBookstoreService bookstoreService)
         {
-            this.bookManager = bookManager;
+            this.bookstoreService = bookstoreService;
         }
 
         [HttpGet]
@@ -25,19 +22,10 @@ namespace BookStore.WebApi.Controllers
         {
             if (string.IsNullOrEmpty(searchString))
             {
-                return await this.bookManager.GetBooksAsync();
+                return await this.bookstoreService.GetBooksAsync();
             }
 
-            searchString = searchString.ToLower();
-
-            return
-                await this.bookManager.GetBooksAsync().ContinueWith(books => (books.Result as IEnumerable<Book>).Where(
-                    x =>
-                        x.Title.ToLower().Contains(searchString) ||
-                        x.Author.ToLower().Contains(searchString) ||
-                        x.InStock.ToString().ToLower().Contains(searchString) ||
-                        x.Price.ToString(CultureInfo.CurrentCulture).ToLower().Contains(searchString))
-                    .ToList());
+            return await this.bookstoreService.GetBooksAsync(searchString);
         }
     }
 }

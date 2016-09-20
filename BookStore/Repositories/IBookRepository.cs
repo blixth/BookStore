@@ -1,11 +1,10 @@
-﻿namespace BookStore.Integration
+﻿namespace BookStore.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using BookStore.Models;
+    using Models;
 
-
-    public interface IContribeClient
+    public interface IBookRepository
     {
         Task<IEnumerable<IBook>> GetBooksAsync();
     }

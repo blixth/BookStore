@@ -13,7 +13,6 @@
             console.log('Quering!');
             bookResource.query({ searchString: vm.searchCriteria }, function (data) {
                 vm.books = data;
-                console.log(data);
             });
         };
 

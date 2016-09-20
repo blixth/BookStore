@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using Models;
 
-    public class BookListDto
+    public class BookList
     {
-        public BookListDto()
+        public BookList()
         {
             this.Books = new List<Book>();
         }
