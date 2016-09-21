@@ -53,14 +53,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CheckoutRow.cs" />
+    <Compile Include="Entities\IOrder.cs" />
+    <Compile Include="Entities\IOrderRow.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderRow.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
     <Compile Include="Repositories\IBookRepository.cs" />
     <Compile Include="Entities\BookList.cs" />
     <Compile Include="Services\BookstoreService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\IBookstoreService.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\IBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IOrderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

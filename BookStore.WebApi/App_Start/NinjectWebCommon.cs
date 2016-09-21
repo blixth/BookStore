@@ -63,6 +63,7 @@ namespace BookStore.WebApi.App_Start
         {
             kernel.Bind<IBookstoreService>().To<BookstoreService>();
             kernel.Bind<IBookRepository>().To<BookRepository>();
+            kernel.Bind<IOrderService>().To<OrderService>();
         }
     }
 }

@@ -3,8 +3,8 @@
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    public interface IBooksController
+    public interface ICheckoutsController
     {
-        Task<IHttpActionResult> GetBooksAsync(string searchString);
+        Task<IHttpActionResult> Post(dynamic checkout);
     }
 }

@@ -4,8 +4,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using BookStore.Services;
+    using Entities;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
     using Moq;
     using Repositories;
 
@@ -35,7 +35,7 @@
 
             this.bookRepository.Setup(x => x.GetBooksAsync()).Returns(Task.FromResult((IEnumerable<IBook>)books));
 
-            var result = await this.bookstoreService.GetBooksAsync();
+            var result = await this.bookstoreService.GetBooksAsync("");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count());
@@ -107,6 +107,40 @@
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
+        public async Task GetBooksAsync_SearchNullTitle_Test()
+        {
+            var books = new List<IBook>()
+            {
+                new Book() {Author = "Author", InStock = 0, Price = 0, Title = null},
+                new Book() {Author = "JOHNCENA", Title = "BAPADAPAOW", InStock = 0,Price = 9001m}
+            };
+
+            this.bookRepository.Setup(x => x.GetBooksAsync()).Returns(Task.FromResult((IEnumerable<IBook>)books));
+
+            var result = await this.bookstoreService.GetBooksAsync("author");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+        }
+
+        [TestMethod]
+        public async Task GetBooksAsync_SearchNullAuthor_Test()
+        {
+            var books = new List<IBook>()
+            {
+                new Book() {Author = "Author", InStock = 0, Price = 0, Title = "TheBestBook"},
+                new Book() {Author = null, Title = "BAPADAPAOW", InStock = 0,Price = 9001m}
+            };
+
+            this.bookRepository.Setup(x => x.GetBooksAsync()).Returns(Task.FromResult((IEnumerable<IBook>)books));
+
+            var result = await this.bookstoreService.GetBooksAsync("BAPADAPAOW");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
         }
     }
 }

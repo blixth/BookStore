@@ -1,4 +1,4 @@
-﻿namespace BookStore.Models
+﻿namespace BookStore.Entities
 {
     public interface IBook
     {

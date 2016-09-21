@@ -1,7 +1,6 @@
-﻿namespace BookStore.Integration.Dto
+﻿namespace BookStore.Entities
 {
     using System.Collections.Generic;
-    using Models;
 
     public class BookList
     {

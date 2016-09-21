@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json.Serialization;
-
-namespace BookStore.WebApi
+﻿namespace BookStore.WebApi
 {
     using System.Web.Http;
+    using System.Web.Http.Cors;
+    using Newtonsoft.Json.Serialization;
 
     public static class WebApiConfig
     {
@@ -16,7 +16,7 @@ namespace BookStore.WebApi
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
                 new CamelCasePropertyNamesContractResolver();
 
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("http://localhost:34659", "*", "*"));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

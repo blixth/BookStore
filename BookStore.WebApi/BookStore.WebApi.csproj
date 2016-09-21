@@ -183,7 +183,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\CheckoutsController.cs" />
     <Compile Include="Controllers\IBooksController.cs" />
+    <Compile Include="Controllers\ICheckoutsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

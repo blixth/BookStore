@@ -9,8 +9,8 @@
             </span>
         </div>
     </form>
-    <div class="panel-heading"
-         style="font-size: large">
+
+    <div class="panel-heading" style="font-size: large">
         Book List
     </div>
 
@@ -28,8 +28,72 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.price | currency }}</td>
+                <td><button ng-click="vm.shoppingCart.addItem(book)">Add</button></td>
+                <td><button ng-click="vm.shoppingCart.removeItem(book)">Remove</button></td>
             </tr>
             </tbody>
+        </table>
+    </div>
+
+    <div class="panel-heading" style="font-size: large">
+        Shopping Cart
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Item</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tr ng-repeat="item in vm.shoppingCart.items">
+                <td>{{ item.title }} - {{item.author}}</td>
+                <td>{{ item.price | currency }}</td>
+                <td>{{ item.quantity }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td>Total:</td>
+                <td></td>
+                <td></td>
+                <td style="font-size: large">{{ vm.shoppingCart.totalSum() | currency }}</td>
+                <td><button ng-click="vm.shoppingCart.checkOut()">Check out</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="panel-heading" style="font-size: large">
+        Order
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Book</td>
+                <td>Quantity</td>
+                <td>Backordered</td>
+                <td>Total amount</td>
+            </tr>
+            </thead>
+            <tr ng-repeat="row in vm.order.rows">
+                <td>{{ row.book.title }} {{row.book.author}}</td>
+                <td>{{ row.quantity }}</td>
+                <td>{{ row.backordered }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ vm.order.totalAmount | currency }}</td>
+            </tr>
         </table>
     </div>
 

@@ -1,13 +1,9 @@
 ﻿namespace BookStore.WebApi.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using System.Web.Http.Cors;
-    using Models;
     using Services;
 
-    [EnableCors("http://localhost:34659", "*", "*")]
     public class BooksController : ApiController, IBooksController
     {
         private readonly IBookstoreService bookstoreService;
@@ -18,14 +14,11 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<IBook>> GetBooksAsync(string searchString)
+        public async Task<IHttpActionResult> GetBooksAsync(string searchString)
         {
-            if (string.IsNullOrEmpty(searchString))
-            {
-                return await this.bookstoreService.GetBooksAsync();
-            }
+            var books = await this.bookstoreService.GetBooksAsync(searchString);
 
-            return await this.bookstoreService.GetBooksAsync(searchString);
+            return this.Ok(books);
         }
     }
 }

@@ -3,8 +3,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using BookStore.Models;
-    using Integration.Dto;
+    using Entities;
     using Newtonsoft.Json;
 
     public class BookRepository : IBookRepository
@@ -13,7 +12,7 @@
 
         public async Task<IEnumerable<IBook>> GetBooksAsync()
         {
-            using (var client = CreateHttpClient())
+            using (var client = new HttpClient())
             {
                 var request = await client.GetAsync(contribeUrl);
 
@@ -23,13 +22,6 @@
 
                 return JsonConvert.DeserializeObject<BookList>(response).Books;
             }
-        }
-
-        private static HttpClient CreateHttpClient()
-        {
-            var httpClient = new HttpClient();
-
-            return httpClient;
         }
     }
 }
